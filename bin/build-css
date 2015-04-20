@@ -1,0 +1,4 @@
+#!/bin/bash  
+node_modules/node-sass/bin/node-sass \
+  --include-path node_modules/bootstrap-sass/assets/stylesheets \
+  scss/index.scss bundle.css

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html ng-app="ba">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Temporal interactive statistics</title>
+    <link rel="stylesheet" type="text/css" ng-href="bundle.css">
+    <script type="text/javascript" src="libs.js"></script>
+  </head>
+  <body>
+    <div id="body" ng-controller="AppController as appCtrl">
+      <h1>Temporal interactive statistics:</h1>
+        Store:
+        <button class="btn btn-default"
+                type="button"
+                ng-model="appCtrl.store"
+                ng-change="appCtrl.DataProvider.load(appCtrl.store)"
+                ng-options="store.name for store in appCtrl.DataProvider.stores"
+                bs-select
+                data-template="{{appCtrl.Path.angularStrap + 'src/select/select.tpl.html'}}"
+                data-placeholder='...'>
+            <span class="caret"></span>
+        </button>
+      
+      <div ng-controller="TemporalController as ctrl" ng-include="appCtrl.Path.ta + 'index.html'" class="container-fluid"></div>
+    </div>
+	
+    <script type="text/javascript" src="bundle.js"></script>
+</body></html>

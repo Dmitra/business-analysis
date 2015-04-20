@@ -1,0 +1,28 @@
+category,subcategory,id,caption,type,formula,unit
+Receipts and Adjustments,Gross Sales,1,Gross Sales,sum,,$
+Receipts and Adjustments,Voids,2,Voids,sum,,$
+Receipts and Adjustments,Discounts,3,Discounts,sum,,$
+Receipts and Adjustments,Net Sales,4,Net Sales,,i[1] - i[2] -i[3],$
+Receipts and Adjustments,Sales Taxes,5,Sales Taxes,sum,,$
+Receipts and Adjustments,Other Receipts,6,Tips Received,sum,,$
+Receipts and Adjustments,Other Receipts,7,Other Receipts,sum,,$
+Receipts and Adjustments,Gross Receipts,8,Gross Receipts,,i[4] + i[5] +i[6]+i[7],$
+Receipts and Adjustments,Payouts,9,Refunds,sum,,$
+Receipts and Adjustments,Payouts,10,Food Purchases,sum,,$
+Receipts and Adjustments,Payouts,11,Tips Paid,sum,,$
+Receipts and Adjustments,Payouts,12,Services,sum,,$
+Receipts and Adjustments,Payouts,13,Supplies,sum,,$
+Receipts and Adjustments,Payouts,14,Other Payouts,sum,,$
+Receipts and Adjustments,Net Receipts,15,Net Receipts,,i[8]-(i[9] + i[10] + i[11] + i[12] + i[13] + i[14]),$
+Deposit Reconcilliation,Deposits,16,JCB,sum,,$
+Deposit Reconcilliation,Deposits,17,Cash,sum,,$
+Deposit Reconcilliation,Deposits,18,Visa,sum,,$
+Deposit Reconcilliation,Deposits,19,Mastercard,sum,,$
+Deposit Reconcilliation,Deposits,20,American Express,sum,,$
+Deposit Reconcilliation,Deposits,21,Other,sum,,$
+Deposit Reconcilliation,Total Deposits,22,Total Deposits,,i[16]+i[17]+i[18]+i[19]+i[20]+i[21],$
+Deposit Reconcilliation,Cash difference,23,Cash Over / (Under),,i[22]-i[15],$
+Labor Summary,Labor Summary,24,Labor Hours,sum,,h
+Labor Summary,Labor Summary,25,Labor Cost,sum,,$
+Labor Summary,Labor Metrics,26,Hourly Labor Cost,,i[25]/i[24],$/h
+Labor Summary,Labor Metrics,27,Labor Cost / Net Sales,,i[25]/i[4]*100,%
