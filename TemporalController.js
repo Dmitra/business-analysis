@@ -1,3 +1,6 @@
+/**
+ * Inherit from temporalModules controller
+ */
 var TemporalController = require('TemporalAnalysis/src/TemporalController')
 var Self = function ($rootScope, $scope, Path, DataService, TemporalService) {
   TemporalController.call(this, $rootScope, $scope, TemporalService, DataService, Path)
@@ -20,19 +23,10 @@ Self.prototype.update = function () {
   }
   //Include only full intervals
   var fitInterval = self.intervalOption.interval.floor(self.groupingOption.name)
-  //to include non-complete period empty data should be set
-  //fitInterval.end = d3.time[self.groupingOption.name].ceil(self.intervalOption.interval.end)
   
   self.data = self.DataService.get(undefined, fitInterval, filterer, self.groupingOption.key)
-
+  self.datum = self.addComparisons(self.data[self.item.id])
   self.calcFormula() 
-
-  self.datum = self.data[self.item.id]
-  self.mean = self.comparisons.average ? self.mean(self.datum) : undefined
-  //TODO previous should be calculated on selected item change unless comparison wouldn't show up in table
-  //Comparisons
-  //TODO PREVIOUS
-  //if (self.comparisons.previous) self.getPrevious(data, valuer, grouper)
   self.$rootScope.$broadcast('selection-change', self.dateFormatter, self.keyParser)
 }
 
@@ -42,14 +36,16 @@ Self.prototype.calcFormula = function () {
   self.DataService.items.forEach(function (item) {
     if (item.formula) {
       var itemData = self.data[item.id]
-      , i = {}
-      for (var k = 0; k < itemData.length; k++) {
-        _.map(self.data, function (groupedArray, key) {
-          i[key] = groupedArray[k].values.grouped.value
-        })
-        itemData[k].values.grouped.value = eval(item.formula)
-      };
-        
+      if (_.isEmpty(itemData)) return
+      _.each(itemData[0].values.grouped, function (grouped, key) {
+        var i = {}
+        for (var k = 0; k < itemData.length; k++) {
+          _.each(self.data, function (groupedArray, itemId) {
+            i[itemId] = groupedArray[k].values.grouped[key]
+          })
+          itemData[k].values.grouped[key] = eval(item.formula)
+        }
+      })
     }
   })
 }
